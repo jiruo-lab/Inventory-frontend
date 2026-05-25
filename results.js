@@ -1,4 +1,4 @@
-    const API_BASE_URL = window.location.origin;
+    const API_BASE_URL = "https://inventory-back-mo0ev0vvw-jiruo-labs-projects.vercel.app";
 
     function params() {
         const s = new URLSearchParams(window.location.search);
@@ -72,7 +72,7 @@
     async function applyQuery() {
         const p = params();
         document.getElementById('title').textContent = `Results — ${p.schema}`;
-        const url = `/api/search?schema=${encodeURIComponent(p.schema)}&q=${encodeURIComponent(p.q)}&all=${p.all ? 1 : 0}`;
+        const url = `${API_BASE_URL}/api/search?schema=${encodeURIComponent(p.schema)}&q=${encodeURIComponent(p.q)}&all=${p.all ? 1 : 0}`;
 
         try {
             const res = await fetch(url);
@@ -150,13 +150,13 @@
     }
 
     async function fetchItemById(itemId) {
-        const response = await fetch(`/inventory/get-item?itemName=${encodeURIComponent(itemId)}`);
+        const response = await fetch(`${API_BASE_URL}/inventory/get-item?itemName=${encodeURIComponent(itemId)}`);
         return response.json();
     }
 
     async function deleteItem(itemId) {
         if (!confirm('Delete this inventory item from the database?')) return;
-        const response = await fetch(`/inventory/delete/${encodeURIComponent(itemId)}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/inventory/delete/${encodeURIComponent(itemId)}`, { method: 'DELETE' });
         if (!response.ok) {
             const message = await response.text();
             throw new Error(message || 'Unable to delete item.');
@@ -172,7 +172,7 @@
             alert('Please enter a valid non-negative number.');
             return;
         }
-        const response = await fetch(`/inventory/update-stocks/${encodeURIComponent(itemId)}`, {
+        const response = await fetch(`${API_BASE_URL}/inventory/update-stocks/${encodeURIComponent(itemId)}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ stocks })
