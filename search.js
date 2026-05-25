@@ -153,6 +153,12 @@ async function performSearch() {
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
 
+    if (!query) {
+        showError('Enter a search term before searching.');
+        document.getElementById('resultsContent').innerHTML = '<p class="no-results">Enter a search term to start.</p>';
+        return;
+    }
+
     clearError();
     showLoading();
 

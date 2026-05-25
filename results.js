@@ -72,6 +72,12 @@
     async function applyQuery() {
         const p = params();
         document.getElementById('title').textContent = `Results — ${p.schema}`;
+        const results = document.getElementById('results');
+        if (!p.q) {
+            results.innerHTML = '<div class="no-results">Please enter a search term and try again.</div>';
+            return;
+        }
+
         const url = `${API_BASE_URL}/api/search?schema=${encodeURIComponent(p.schema)}&q=${encodeURIComponent(p.q)}&all=${p.all ? 1 : 0}`;
 
         try {
