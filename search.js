@@ -1,5 +1,5 @@
 // search.js - client-side search logic for session23/index.html
-const API_BASE_URL = "https://inventory-back-mo0ev0vvw-jiruo-labs-projects.vercel.app/";
+const API_BASE_URL = "https://inventory-back-mo0ev0vvw-jiruo-labs-projects.vercel.app";
 let currentSearchType = 'all';
 
 function debounce(func, delay) {
